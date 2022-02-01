@@ -1,5 +1,12 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{biblatex}
+\addbibresource{sample.bib}
+
+\usepackage{pst-all}
+\psset{xunit=.5cm,yunit=0.5cm,algebraic=true}
 
 \title{P0}
 \author{edgardjfc }
@@ -15,18 +22,28 @@ This homework is an example on how to use overleaf and how to edit basic .tex do
 
 \maketitle
 
-\section{First Class}
+\section{Formulas and Equations}
+
+\[
+    x = \frac{-b+\sqrt{b^2 - 2ac}}{2a}
+\]
 
 \maketitle
 
-\section{Second Class}
+\section{Graphs and functions}
+
+\begin{pspicture}(-11,-11)(11,11)
+\psaxes[Dx=2, Dy=2, subticks=2, labelFontSize=\scriptscriptstyle]{<->}(0,0)(-10.5,-10.5)(10.5,10.5)[$x$,0][$y$,90]
+\psplot[linestyle=dotted, linewidth=2pt, linecolor=red, yMaxValue=10, yMinValue=-10]{0.1}{10} {.5*x^2}
+\end{pspicture}
 
 \maketitle
 
-\section{Third Class}
+\section{Bibliography}
 
-\maketitle
+Let's cite! The Einstein's journal paper \cite{einstein} and the Dirac's 
+book \cite{dirac} are physics related items. 
 
-\section{Fourth Class}
+\printbibliography
 
 \end{document}
