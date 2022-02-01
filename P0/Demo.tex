@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 
@@ -32,10 +32,13 @@ This homework is an example on how to use overleaf and how to edit basic .tex do
 
 \section{Graphs and functions}
 
-\begin{pspicture}(-11,-11)(11,11)
-\psaxes[Dx=2, Dy=2, subticks=2, labelFontSize=\scriptscriptstyle]{<->}(0,0)(-10.5,-10.5)(10.5,10.5)[$x$,0][$y$,90]
-\psplot[linestyle=dotted, linewidth=2pt, linecolor=red, yMaxValue=10, yMinValue=-10]{0.1}{10} {.5*x^2}
+\begin{figure}[h]
+\begin{pspicture}(-11,11)(11,11)
+  \psaxes[Dx=2, Dy=2, subticks=2, labelFontSize=\scriptstyle]{<->}(0,0)(-10.5,-10.5)(10.5,10.5)[$x$,0][$y$,90]
+  \psplot[linestyle = dotted, linewidth = 2pt, linecolor = red, yMaxValue = 10, yMinValue = -10]{-10}{10}{.5*x^2}
 \end{pspicture}
+\end{figure}
+\newpage
 
 \maketitle
 
