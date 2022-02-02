@@ -8,5 +8,7 @@ for k in range(menor, mayor + 1):
     lista=[ randint(desde, hasta) for i in range(n) ]
     lista.sort()
     print(n, lista[0], lista[-1])
+  
+%Medir el tiempo y memoria
     
 
