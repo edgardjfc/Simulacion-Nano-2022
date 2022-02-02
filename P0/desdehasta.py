@@ -9,6 +9,6 @@ for k in range(menor, mayor + 1):
     lista.sort()
     print(n, lista[0], lista[-1])
   
-%Medir el tiempo y memoria
+#Medir el tiempo y memoria
     
 
