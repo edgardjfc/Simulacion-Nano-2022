@@ -34,8 +34,8 @@ for k in range(menor, mayor + 1):
     lista.sort()
     despues = time()
     diferencia = despues - antes  
-    print('ordenar', n, 'elementos toma', diferencia, 'segundos ',
-          '\n y en conjunto pesan', get_size(lista), 'bytes')
+    print('To order', n, 'elements it takes', diferencia, 'seconds',
+          '\n and together they weight', get_size(lista), 'bytes')
     
 
 
