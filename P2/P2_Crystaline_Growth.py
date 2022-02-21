@@ -33,9 +33,6 @@ def step(grid, dimension):
             nextGrid[x,y] = grid[x,y] + 1*(alivesurroundings >= 3 and alivesurroundings < 8)
     return nextGrid
         
-dim = [10,15,20]
-p   = [0.2,0.4,0.6,0.8]
-
 if __name__ == "__main__":
     var = makeInitialConditions(50,0.15)
     fig = plt.figure()
