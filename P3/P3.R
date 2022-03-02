@@ -34,56 +34,114 @@ repetitions <- 30
 
 suppressMessages(library(doParallel))
 registerDoParallel(makeCluster(detectCores()))
-oa <-  numeric()
-ia <-  numeric()
-ra <-  numeric()
+oaa <-  numeric()
+iaa <-  numeric()
+raa <-  numeric()
 for (r in 1:repetitions) {
-    oa <- c(oa, system.time(foreach(n = original,
+    oaa <- c(oaa, system.time(foreach(n = original,
                                     .combine=c) %dopar% prime(n))[3])
-    ia <- c(ia, system.time(foreach(n = inverted,
+    iaa <- c(iaa, system.time(foreach(n = inverted,
                                     .combine=c) %dopar% prime(n))[3])
-    ra <- c(ra, system.time(foreach(n = randomized,
+    raa <- c(raa, system.time(foreach(n = randomized,
                                     .combine=c) %dopar% prime(n))[3])
 }
 stopImplicitCluster()
 
-summary(oa)
-summary(ia)
-summary(ra)
+summary(oaa)
+summary(iaa)
+summary(raa)
 
 suppressMessages(library(doParallel))
 registerDoParallel(makeCluster(detectCores() / 2))
-ob <-  numeric()
-ib <-  numeric()
-rb <-  numeric()
+oba <-  numeric()
+iba <-  numeric()
+rba <-  numeric()
 for (r in 1:repetitions) {
-    ob <- c(ob, system.time(foreach(n = original,
+    oba <- c(oba, system.time(foreach(n = original,
                                     .combine=c) %dopar% prime(n))[3])
-    ib <- c(ib, system.time(foreach(n = inverted,
+    iba <- c(iba, system.time(foreach(n = inverted,
                                     .combine=c) %dopar% prime(n))[3])
-    rb <- c(rb, system.time(foreach(n = randomized,
+    rba <- c(rba, system.time(foreach(n = randomized,
                                     .combine=c) %dopar% prime(n))[3])
 }
 stopImplicitCluster()
 
-summary(ob)
-summary(ib)
-summary(rb)
+summary(oba)
+summary(iba)
+summary(rba)
 
 suppressMessages(library(doParallel))
 registerDoParallel(1)
-oc <-  numeric()
-ic <-  numeric()
-rc <-  numeric()
+oca <-  numeric()
+ica <-  numeric()
+rca <-  numeric()
 for (r in 1:repetitions) {
-    oc <- c(oc, system.time(foreach(n = original,
+    oca <- c(oca, system.time(foreach(n = original,
                                     .combine=c) %dopar% prime(n))[3])
-    ic <- c(ic, system.time(foreach(n = inverted,
+    ica <- c(ica, system.time(foreach(n = inverted,
                                     .combine=c) %dopar% prime(n))[3])
-    rc <- c(rc, system.time(foreach(n = randomized,
+    rca <- c(rca, system.time(foreach(n = randomized,
                                     .combine=c) %dopar% prime(n))[3])
 }
 stopImplicitCluster()
-summary(oc)
-summary(ic)
-summary(rc)
+summary(oca)
+summary(ica)
+summary(rca)
+
+suppressMessages(library(doParallel))
+registerDoParallel(makeCluster(detectCores()))
+oab <-  numeric()
+iab <-  numeric()
+rab <-  numeric()
+for (r in 1:repetitions) {
+    oab <- c(oab, system.time(foreach(n = original,
+                                    .combine=c) %dopar% primeAlt(n))[3])
+    iab <- c(iab, system.time(foreach(n = inverted,
+                                    .combine=c) %dopar% primeAlt(n))[3])
+    rab <- c(rab, system.time(foreach(n = randomized,
+                                    .combine=c) %dopar% primeAlt(n))[3])
+}
+stopImplicitCluster()
+
+summary(oab)
+summary(iab)
+summary(rab)
+
+suppressMessages(library(doParallel))
+registerDoParallel(makeCluster(detectCores() / 2))
+obb <-  numeric()
+ibb <-  numeric()
+rbb <-  numeric()
+for (r in 1:repetitions) {
+    obb <- c(obb, system.time(foreach(n = original,
+                                    .combine=c) %dopar% primeAlt(n))[3])
+    ibb <- c(ibb, system.time(foreach(n = inverted,
+                                    .combine=c) %dopar% primeAlt(n))[3])
+    rbb <- c(rbb, system.time(foreach(n = randomized,
+                                    .combine=c) %dopar% primeAlt(n))[3])
+}
+stopImplicitCluster()
+
+summary(obb)
+summary(ibb)
+summary(rbb)
+
+suppressMessages(library(doParallel))
+registerDoParallel(1)
+ocb <-  numeric()
+icb <-  numeric()
+rcb <-  numeric()
+for (r in 1:repetitions) {
+    ocb <- c(ocb, system.time(foreach(n = original,
+                                    .combine=c) %dopar% primeAlt(n))[3])
+    icb <- c(icb, system.time(foreach(n = inverted,
+                                    .combine=c) %dopar% primeAlt(n))[3])
+    rcb <- c(rcb, system.time(foreach(n = randomized,
+                                    .combine=c) %dopar% primeAlt(n))[3])
+}
+stopImplicitCluster()
+summary(ocb)
+summary(icb)
+summary(rcb)
+
+boxplot(oaa, iaa, raa, oba, iba, rba, oca, ica, rca, oab, iab, rab, obb, ibb, rbb, ocb, icb, rcb)
