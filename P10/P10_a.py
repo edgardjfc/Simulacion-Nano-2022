@@ -64,8 +64,6 @@ n = 100
 tmax = 150
 iterations = 20
 
-#####Combinacion 1#####
-
 pm, rep, init = 0.05, 50, 100
 results1 = []
 
@@ -112,8 +110,6 @@ for runs in range(iterations):
         plt.ylim(0.95 * min(betterOnes), 1.05 * optimal)
         plt.savefig('p10p_I1_C1.png', bbox_inches='tight') 
         plt.close()
-
-#####Combinacion 2#####
 
 pm, rep, init = 0.025, 100, 200
 results2 = []
