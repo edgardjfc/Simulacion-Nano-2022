@@ -5,10 +5,10 @@ import matplotlib.pyplot as plt
 import matplotlib.colorbar as colorbar
 from matplotlib.colors import LinearSegmentedColormap
 
-paso = 256 // 10
-niveles = [i/256 for i in range(0, 256, paso)]
-colores = [(niveles[i], 0, niveles[-(i + 1)]) for i in range(len(niveles))]
-palette = LinearSegmentedColormap.from_list('tonos', colores, N = len(colores))
+step = 256 // 10
+levels = [i/256 for i in range(0, 256, step)]
+colors = [(levels[i], 0, levels[-(i + 1)]) for i in range(len(levels))]
+palette = LinearSegmentedColormap.from_list('tonos', colors, N = len(colors))
  
 from math import fabs, sqrt, floor, log
 eps = 0.001
@@ -31,10 +31,10 @@ def fuerza(i, shared):
         fy -= dy * factor
     return (fx, fy)
  
-def actualiza(pos, fuerza, de):
+def update(pos, fuerza, de):
     return max(min(pos + de * fuerza, 1), 0)
 
-def velocidad(p, pa):
+def speed(p, pa):
     ppa = pa.data
     n = pa.count
     for i in range(n):
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     p['v'] = [[0]]*n
     mgr = multiprocessing.Manager()
     ns = mgr.Namespace()
-    ns.data = p
+    ns.data = p # compartido entre el pool
     ns.count = n 
     tmax = 59
     digitos = floor(log(tmax, 10)) + 1
@@ -80,12 +80,12 @@ if __name__ == "__main__":
     plt.close()
 
     for t in range(tmax):
-        with multiprocessing.Pool() as pool:
+        with multiprocessing.Pool() as pool: # rehacer para que vea cambios en p
             f = pool.starmap(fuerza, [(i, ns) for i in range(n)])
             delta = 0.02 / max([max(fabs(fx), fabs(fy)) for (fx, fy) in f])
-            p['x'] = pool.starmap(actualiza, zip(p.x, [v[0] for v in f], repeat(delta)))
-            p['y'] = pool.starmap(actualiza, zip(p.y, [v[1] for v in f], repeat(delta)))
-            velocidad(p, ns)
+            p['x'] = pool.starmap(update, zip(p.x, [v[0] for v in f], repeat(delta)))
+            p['y'] = pool.starmap(update, zip(p.y, [v[1] for v in f], repeat(delta)))
+            speed(p, ns)
             fig, ax = plt.subplots(figsize=(6, 5), ncols=1)
             pos = plt.scatter(p.x, p.y, c = p.g, s = 70, cmap = palette)
             fig.colorbar(pos, ax=ax)
